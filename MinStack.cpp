@@ -16,7 +16,8 @@ Node *Node::getPrevMinItem() const { return prevMinItem; }
 Node::~Node() {}
 
 MinStack::MinStack() : lastItem(nullptr), sz(0), minItem(nullptr) {}
-MinStack::MinStack(std::initializer_list<int> list) : sz(list.size()) {
+MinStack::MinStack(std::initializer_list<int> list) {
+  sz = 0;
   lastItem = minItem = nullptr;
   for (auto i : list) {
     this->push(i);
@@ -62,21 +63,33 @@ int MinStack::pop() {
     sz--;
     return returnData;
   } else {
-    std::cout << "STOS PUSTY!" << std::endl;
+    std::cout << "Stack is empty!" << std::endl;
     return 0;
   }
 }
-int MinStack::top() const { return lastItem->getData(); }
-int MinStack::getMin() const { return minItem->getData(); }
+int MinStack::top() const {
+  if (sz > 0)
+    return lastItem->getData();
+  else {
+    std::cout << "Stack is empty!" << std::endl;
+    return 0;
+  }
+}
+int MinStack::getMin() const {
+  if (sz > 0) {
+    return minItem->getData();
+  } else {
+    std::cout << "Stack is empty!" << std::endl;
+    return 0;
+  }
+}
 
 std::size_t MinStack::size() const { return sz; }
 bool MinStack::empty() const { return lastItem == nullptr ? 1 : 0; }
 
 MinStack::~MinStack() {
   while (sz > 0) {
-    Node *tempItem = (*lastItem).getPrevious();
-    delete lastItem;
-    lastItem = tempItem;
+    this->pop();
     sz--;
   }
 }
