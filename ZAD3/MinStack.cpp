@@ -88,7 +88,7 @@ std::size_t MinStack::size() const { return sz; }
 bool MinStack::empty() const { return lastItem == nullptr ? 1 : 0; }
 
 MinStack::~MinStack() {
-  while (sz > 0) {
+  while (this->empty()) {
     this->pop();
     sz--;
   }

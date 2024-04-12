@@ -15,7 +15,7 @@ int main() {
 
   MinStack s1({1, 2, 3, 4, 5, 7, 10, -14, -28});
   std::cout << s1.size() << std::endl;
-  std::cout << s1.getMin() << " " << s1.pop() << std::endl;
+  std::cout << s1.getMin() << std::endl;
 
   return 0;
 }
