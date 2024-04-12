@@ -52,7 +52,7 @@ void MinStack::push(const int &d) {
 }
 
 int MinStack::pop() {
-  if (sz > 0) {
+  if (!this->empty()) {
     Node *tempItem = lastItem->getPrevious();
     if (lastItem == minItem) {
       minItem = lastItem->getPrevMinItem();
@@ -88,8 +88,7 @@ std::size_t MinStack::size() const { return sz; }
 bool MinStack::empty() const { return lastItem == nullptr ? 1 : 0; }
 
 MinStack::~MinStack() {
-  while (this->empty()) {
+  while (sz > 0) {
     this->pop();
-    sz--;
   }
 }
